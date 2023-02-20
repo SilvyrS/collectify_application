@@ -26,7 +26,13 @@ class AboutUs extends StatelessWidget {
                   style: GoogleFonts.lobsterTwo(fontSize: 60),
                 ),
               ]),
-          Row()
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Image.asset(
+              '../assets/color_paletter.jpg',
+              width: 250,
+              height: 150,
+            ),
+          ])
         ],
       ),
     );
