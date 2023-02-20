@@ -39,7 +39,7 @@ class AboutUs extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(50, 20, 50, 120),
               child: RichText(
                 text: TextSpan(
-                  text: 'Collectify',
+                  text: 'Collectify ',
                   style: TextStyle(
                     fontSize: 30,
                     color: Color(0xFF30326b),
@@ -47,9 +47,9 @@ class AboutUs extends StatelessWidget {
                     decorationStyle: TextDecorationStyle.double,
                   ),
                   children: <TextSpan>[
-                    TextSpan(
+                    RichText(
                       text:
-                          'Lorem ipsum dolor sit amet, consectetur labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                          'is a gallery application showcasing a collection of faunas around the world.',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
