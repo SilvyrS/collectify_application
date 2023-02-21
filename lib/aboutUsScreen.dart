@@ -34,33 +34,35 @@ class AboutUs extends StatelessWidget {
             ),
           ]),
           Container(
-            color: Color(0xFFbbdc59),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(50, 20, 50, 120),
-              child: RichText(
-                text: TextSpan(
-                  text: 'Collectify',
-                  style: TextStyle(
-                    fontSize: 30,
-                    color: Color(0xFF30326b),
-                    decoration: TextDecoration.underline,
-                    decorationStyle: TextDecorationStyle.double,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text:
-                          'Lorem ipsum dolor sit amet, consectetur labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                        decoration: TextDecoration.none,
-                      ),
-                    )
-                  ],
+            color: Color.fromARGB(255, 211, 230, 156),
+            margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+            //child: Padding(
+            //padding: const EdgeInsets.fromLTRB(50, 20, 50, 50),
+            child: RichText(
+              softWrap: true,
+              text: TextSpan(
+                text: 'Collectify',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Color(0xFF30326b),
+                  decoration: TextDecoration.underline,
+                  decorationStyle: TextDecorationStyle.double,
                 ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text:
+                        'is a gallery application showcasing a collection of faunas around the world. With its user-friendly interface, Collectify enables users to explore and learn about these creatures through vivid images, detailed descriptions, and engaging facts. Whether you are a seasoned naturalist or simply curious about the animal kingdom. Collectify offers an immersive and informative experience that is both fun and educational.',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                      decoration: TextDecoration.none,
+                    ),
+                  )
+                ],
               ),
             ),
-          )
+          ),
+          //)
         ],
       ),
     );
