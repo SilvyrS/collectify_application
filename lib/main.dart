@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'aboutUsScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'app_drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: AboutUs(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
