@@ -22,15 +22,21 @@ class AboutUs extends StatelessWidget {
   Column AppTitle() {
     return Column(
       children: [
+        SizedBox(
+          height: 30,
+        ),
         Row(
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Column contents vertically,
             children: [
               Image.asset(
                 '../assets/logo1.png',
-                width: 150,
-                height: 150,
+                width: 125,
+                height: 125,
                 fit: BoxFit.contain,
+              ),
+              SizedBox(
+                width: 20,
               ),
               Text(
                 'Collectify',
@@ -68,7 +74,7 @@ class AboutUs extends StatelessWidget {
             children: <TextSpan>[
               TextSpan(
                 text:
-                    ' is a gallery application showcasing a collection of faunas around the world. With its user-friendly interface, Collectify enables users to explore and learn about these creatures through vivid images, detailed descriptions, and engaging facts. Whether you are a seasoned naturalist or simply curious about the animal kingdom. Collectify offers an immersive and informative experience that is both fun and educational.',
+                    ' is a gallery application showcasing a collection of fauna and flora around the world. With its user-friendly interface, Collectify enables users to explore and learn about these creatures and plants through vivid images, detailed descriptions, and engaging facts. Whether you are a seasoned naturalist or simply curious about the animal or plant kingdom. Collectify offers an immersive and informative experience that is both fun and educational.',
                 style: GoogleFonts.robotoSlab(
                   fontSize: 15,
                   color: Colors.black,

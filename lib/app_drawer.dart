@@ -24,8 +24,8 @@ Column HeaderDrawer() {
     children: [
       Image.asset(
         '../assets/logo1.png',
-        height: 50,
-        width: 50,
+        height: 80,
+        width: 80,
       ),
       const SizedBox(
         height: 20,
@@ -65,6 +65,17 @@ Column ListDrawer() {
       ),
       ListTile(
         leading: Image.asset(
+          '../assets/plant.png',
+          height: 30,
+          width: 30,
+        ),
+        title: Text('Plant Kingdom'),
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      ListTile(
+        leading: Image.asset(
           '../assets/aboutus.png',
           height: 30,
           width: 30,
@@ -72,7 +83,7 @@ Column ListDrawer() {
         title: Text('About Us'),
       ),
       SizedBox(
-        height: 500,
+        height: 450,
       ),
       Column(
         mainAxisAlignment: MainAxisAlignment.end,
