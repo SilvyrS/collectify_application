@@ -1,3 +1,7 @@
+import 'dart:js';
+
+import 'package:collectify_application/aboutUsScreen.dart';
+import 'package:collectify_application/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -38,14 +42,31 @@ Column HeaderDrawer() {
   );
 }
 
+void _routetoHome(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+}
+
+void _routetoAbout(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => AboutUs()));
+}
+//navigator builds wont work REVISE the codes at some point
+
 Column ListDrawer() {
   return Column(
     children: [
       ListTile(
-        leading: Image.asset(
-          '../assets/home.png',
-          height: 30,
-          width: 30,
+        leading: GestureDetector(
+          child: Image.asset(
+            '../assets/home.png',
+            height: 30,
+            width: 30,
+          ),
+          onLongPress: () {
+            Navigator.of(context as BuildContext).push(
+                MaterialPageRoute(builder: (context) => const HomeScreen()));
+          },
         ),
         title: Text('Home'),
       ),
@@ -75,10 +96,15 @@ Column ListDrawer() {
         height: 20,
       ),
       ListTile(
-        leading: Image.asset(
-          '../assets/aboutus.png',
-          height: 30,
-          width: 30,
+        leading: GestureDetector(
+          onLongPress: () {
+            _routetoAbout(context as BuildContext);
+          },
+          child: Image.asset(
+            '../assets/aboutus.png',
+            height: 30,
+            width: 30,
+          ),
         ),
         title: Text('About Us'),
       ),
