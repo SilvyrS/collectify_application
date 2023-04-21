@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'aboutUsScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'app_drawer.dart';
+import 'home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AboutUs(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
