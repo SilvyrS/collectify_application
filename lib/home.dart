@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
         SearchBar(),
         GridImage(),
       ]),
-      drawer: MyAppBar(),
+      drawer: MyAppBar(context),
     );
   }
 
@@ -38,6 +38,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  //
   Container GridImage() {
     return Container(
       child: Container(

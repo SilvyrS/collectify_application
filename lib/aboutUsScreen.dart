@@ -15,7 +15,7 @@ class AboutUs extends StatelessWidget {
       body: Column(
         children: [AppTitle(), AppDescription()],
       ),
-      drawer: MyAppBar(),
+      drawer: MyAppBar(context),
     );
   }
 

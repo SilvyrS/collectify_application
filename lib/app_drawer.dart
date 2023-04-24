@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-Widget MyAppBar() {
+Widget MyAppBar(BuildContext context) {
   return Drawer(
     child: ListView(
       children: <Widget>[
@@ -16,7 +16,7 @@ Widget MyAppBar() {
           ),
           child: HeaderDrawer(),
         ),
-        ListDrawer()
+        ListDrawer(context)
       ],
     ),
   );
@@ -42,18 +42,9 @@ Column HeaderDrawer() {
   );
 }
 
-void _routetoHome(BuildContext context) {
-  Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => HomeScreen()));
-}
+//navigator builds wont work REVISE the codes at some point meanwhile I'll go sob over in the corner
 
-void _routetoAbout(BuildContext context) {
-  Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => AboutUs()));
-}
-//navigator builds wont work REVISE the codes at some point
-
-Column ListDrawer() {
+Column ListDrawer(BuildContext context) {
   return Column(
     children: [
       ListTile(
@@ -63,12 +54,16 @@ Column ListDrawer() {
             height: 30,
             width: 30,
           ),
-          onLongPress: () {
-            Navigator.of(context as BuildContext).push(
-                MaterialPageRoute(builder: (context) => const HomeScreen()));
+          onTap: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => const HomeScreen()));
           },
         ),
         title: Text('Home'),
+        onTap: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+        },
       ),
       SizedBox(
         height: 20,
@@ -97,16 +92,21 @@ Column ListDrawer() {
       ),
       ListTile(
         leading: GestureDetector(
-          onLongPress: () {
-            _routetoAbout(context as BuildContext);
-          },
           child: Image.asset(
             '../assets/aboutus.png',
             height: 30,
             width: 30,
           ),
+          onTap: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => const AboutUs()));
+          },
         ),
         title: Text('About Us'),
+        onTap: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => const AboutUs()));
+        },
       ),
       SizedBox(
         height: 450,
