@@ -132,7 +132,7 @@ class HomeScreen extends StatelessWidget {
             height: 220,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
-                color: Color.fromARGB(255, 218, 140, 67)),
+                color: Color.fromARGB(255, 230, 145, 66)),
             padding: EdgeInsets.all(8.0),
             margin: EdgeInsets.all(10.0),
             child: Row(
@@ -293,6 +293,92 @@ class HomeScreen extends StatelessWidget {
                           margin: EdgeInsets.only(left: 10.5),
                           height: 200,
                           child: Image.asset('../assets/Bryophyta2.jpg')),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          //Fourth
+          Container(
+            height: 220,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                color: Color.fromARGB(255, 230, 145, 66)),
+            padding: EdgeInsets.all(8.0),
+            margin: EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //Kingdom indicator
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 160,
+                          height: 60,
+                          child: Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(10.0)),
+                            child: Text(
+                              'Animal Kingdom',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    // Main Name
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(
+                            left: 10,
+                          ),
+                          child: Text(
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white),
+                              'Fish'),
+                        )
+                      ],
+                    ),
+                    //Description
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 10.0, top: 5.0),
+                          width: 200,
+                          child: Expanded(
+                            child: Text(
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
+                                'Fish are aquatic vertebrate animals that have gills but lack limbs with digits, like fingers or toes. Recall that vertebrates are animals with internal backbones. Most fish are streamlined in their general body form.'),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ClipRect(
+                      child: Container(
+                          margin: EdgeInsets.only(left: 10.5),
+                          height: 200,
+                          child: Image.asset('../assets/fish2.jpg')),
                     )
                   ],
                 )
