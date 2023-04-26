@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Color(0xFF130f40),
         title: Text('Collectify', style: GoogleFonts.lobsterTwo(fontSize: 30)),
       ),
@@ -19,19 +20,25 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Container SearchBar() {
-    return Container(
-      margin: EdgeInsets.all(20.0),
-      alignment: Alignment.center,
-      child: Container(
-        height: 45,
-        width: 300,
-        child: TextField(
-          decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+  Widget SearchBar() {
+    return Column(
+      children: [
+        Container(
+          margin:
+              EdgeInsets.only(top: 20.0, right: 20.0, left: 20.0, bottom: 5.0),
+          alignment: Alignment.center,
+          child: Container(
+            height: 45,
+            width: 300,
+            child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Search',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0))),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -45,7 +52,7 @@ class HomeScreen extends StatelessWidget {
             height: 220,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
-                color: Color.fromARGB(255, 75, 172, 75)),
+                color: Color(0xFF6ab04d)),
             padding: EdgeInsets.all(8.0),
             margin: EdgeInsets.all(10.0),
             child: Row(
@@ -132,7 +139,7 @@ class HomeScreen extends StatelessWidget {
             height: 220,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
-                color: Color.fromARGB(255, 230, 145, 66)),
+                color: Color(0xFF30326B)),
             padding: EdgeInsets.all(8.0),
             margin: EdgeInsets.all(10.0),
             child: Row(
@@ -218,7 +225,7 @@ class HomeScreen extends StatelessWidget {
             height: 220,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
-                color: Color.fromARGB(255, 75, 172, 75)),
+                color: Color(0xFF6ab04d)),
             padding: EdgeInsets.all(8.0),
             margin: EdgeInsets.all(10.0),
             child: Row(
@@ -304,7 +311,7 @@ class HomeScreen extends StatelessWidget {
             height: 220,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
-                color: Color.fromARGB(255, 230, 145, 66)),
+                color: Color(0xFF30326b)),
             padding: EdgeInsets.all(8.0),
             margin: EdgeInsets.all(10.0),
             child: Row(
