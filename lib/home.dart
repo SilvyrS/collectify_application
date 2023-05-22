@@ -1,11 +1,65 @@
-import 'dart:html';
+import 'detailsPage.dart';
+import 'package:collectify_application/models/plantmodel.dart';
 import 'app_drawer.dart';
+import 'models/plantmodel.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<Plant_Animal> items = [
+    Plant_Animal(
+        kingdom: 'Plant Kingdom',
+        name: 'Thallophyta',
+        description:
+            'Primitive and simple body structures. The plant body is thallus, they may be filamentous, colonial, branched or unbranched. include green algae, red algae and brown algae.',
+        imagePath: 'assets/Thallophyta2.jpg'),
+    Plant_Animal(
+        kingdom: 'Animal Kingdom',
+        name: 'Arthropod',
+        description:
+            'Phylum of invertebrate animals (as insects, arachnids, and crustaceans) having a segmented body, jointed limbs, and a shell of chitin that is shed periodically.',
+        imagePath: 'assets/arthropod.jpg'),
+    Plant_Animal(
+        kingdom: 'Plant Kingdom',
+        name: 'Byrophytes',
+        description:
+            'Bryophytes are terrestrial plants but are known as “amphibians of the plant kingdom” as they require water for sexual reproduction. Bryophyta includes mosses, hornworts and liverworts.',
+        imagePath: 'assets/Bryophyta2.jpg'),
+    Plant_Animal(
+        kingdom: 'Animal Kingdom',
+        name: 'Fish',
+        description:
+            'Fish are aquatic vertebrate animals that have gills but lack limbs with digits, like fingers or toes. Recall that vertebrates are animals with internal backbones. Most fish are streamlined in their general body form.',
+        imagePath: 'assets/fish2.jpg'),
+    // Add more items as needed
+  ];
+
+  List<Plant_Animal> foundItems = [];
+
+  void initState() {
+    // at the beginning, all users are shown
+    super.initState();
+    foundItems.addAll(items);
+  }
+
+  void filterItems(String query) {
+    query = query.toLowerCase();
+    setState(() {
+      foundItems = items
+          .where((item) =>
+              item.name.toLowerCase().contains(query) ||
+              item.kingdom.toLowerCase().contains(query))
+          .toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +69,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Color(0xFF130f40),
         title: Text('Collectify', style: GoogleFonts.lobsterTwo(fontSize: 30)),
       ),
-      body: Column(children: <Widget>[SearchBar(), GridImage(context)]),
+      body: Column(children: <Widget>[SearchBar(), gridMage(context)]),
       drawer: MyAppBar(context),
     );
   }
@@ -31,6 +85,7 @@ class HomeScreen extends StatelessWidget {
             height: 45,
             width: 300,
             child: TextField(
+              onChanged: (value) => filterItems(value),
               decoration: InputDecoration(
                   hintText: 'Search',
                   border: OutlineInputBorder(
@@ -42,357 +97,56 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget GridImage(BuildContext context) {
+  Widget gridMage(BuildContext context) {
     return Expanded(
-      child: ListView(
-        padding: EdgeInsets.all(5.0),
-        children: <Widget>[
-          //One List
-          Container(
-            height: 220,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Color(0xFF6ab04d)),
-            padding: EdgeInsets.all(8.0),
-            margin: EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //Kingdom indicator
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 150,
-                          height: 60,
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Text(
-                              'Plant Kingdom',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
+      child: Container(
+        padding: EdgeInsets.all(8.0),
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                mainAxisExtent: 200,
+                childAspectRatio: 2 / 1,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20),
+            itemCount: foundItems.length,
+            itemBuilder: (BuildContext ctx, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          DetailsPage(item: foundItems[index]),
                     ),
-                    // Main Name
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 10,
-                          ),
-                          child: Text(
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.white),
-                              'Thallophyta'),
-                        )
-                      ],
-                    ),
-                    //Description
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 10.0, top: 5.0),
-                          width: 200,
-                          child: Expanded(
-                            child: Text(
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white),
-                                'Primitive and simple body structures. The plant body is thallus, they may be filamentous, colonial, branched or unbranched. include green algae, red algae and brown algae.'),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+                  );
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Color(0xFF6ab04d),
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                          colorFilter: new ColorFilter.mode(
+                              Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                          image: AssetImage(foundItems[index].imagePath))),
+                  child: Container(
+                      alignment: Alignment.center,
+                      height: 85,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3),
+                          color: Color.fromARGB(131, 0, 0, 0)),
+                      child: Text(
+                        foundItems[index].name,
+                        style: GoogleFonts.alegreyaSans(
+                          color: Colors.white,
+                          fontSize: 30,
+                        ),
+                        textAlign: TextAlign.center,
+                      )),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ClipRect(
-                      child: Container(
-                          margin: EdgeInsets.only(left: 10.5),
-                          height: 200,
-                          child: Image.asset('../assets/Thallophyta2.jpg')),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-
-          //2nd list
-          Container(
-            height: 220,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Color(0xFF30326B)),
-            padding: EdgeInsets.all(8.0),
-            margin: EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //Kingdom indicator
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 160,
-                          height: 60,
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Text(
-                              'Animal Kingdom',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    // Main Name
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 10,
-                          ),
-                          child: Text(
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.white),
-                              'Arthropod'),
-                        )
-                      ],
-                    ),
-                    //Description
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 10.0, top: 5.0),
-                          width: 200,
-                          child: Expanded(
-                            child: Text(
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white),
-                                'Phylum of invertebrate animals (as insects, arachnids, and crustaceans) having a segmented body, jointed limbs, and a shell of chitin that is shed periodically.'),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ClipRect(
-                      child: Container(
-                          margin: EdgeInsets.only(left: 10.5),
-                          height: 200,
-                          child: Image.asset('../assets/arthropod2.jpg')),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          //Third
-          Container(
-            height: 220,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Color(0xFF6ab04d)),
-            padding: EdgeInsets.all(8.0),
-            margin: EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //Kingdom indicator
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 160,
-                          height: 60,
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Text(
-                              'Plant Kingdom',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    // Main Name
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 10,
-                          ),
-                          child: Text(
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.white),
-                              'Bryophytes'),
-                        )
-                      ],
-                    ),
-                    //Description
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 10.0, top: 5.0),
-                          width: 200,
-                          child: Expanded(
-                            child: Text(
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white),
-                                'Bryophytes are terrestrial plants but are known as “amphibians of the plant kingdom” as they require water for sexual reproduction. Bryophyta includes mosses, hornworts and liverworts.'),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ClipRect(
-                      child: Container(
-                          margin: EdgeInsets.only(left: 10.5),
-                          height: 200,
-                          child: Image.asset('../assets/Bryophyta2.jpg')),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          //Fourth
-          Container(
-            height: 220,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Color(0xFF30326b)),
-            padding: EdgeInsets.all(8.0),
-            margin: EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //Kingdom indicator
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 160,
-                          height: 60,
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Text(
-                              'Animal Kingdom',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    // Main Name
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 10,
-                          ),
-                          child: Text(
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.white),
-                              'Fish'),
-                        )
-                      ],
-                    ),
-                    //Description
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 10.0, top: 5.0),
-                          width: 200,
-                          child: Expanded(
-                            child: Text(
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white),
-                                'Fish are aquatic vertebrate animals that have gills but lack limbs with digits, like fingers or toes. Recall that vertebrates are animals with internal backbones. Most fish are streamlined in their general body form.'),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ClipRect(
-                      child: Container(
-                          margin: EdgeInsets.only(left: 10.5),
-                          height: 200,
-                          child: Image.asset('../assets/fish2.jpg')),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-        ],
+              );
+            }),
       ),
     );
   }

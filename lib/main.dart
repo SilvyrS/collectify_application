@@ -1,10 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'aboutUsScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'app_drawer.dart';
 import 'home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  bool connected = Firebase.apps.isNotEmpty;
+  print('Firebase is $connected');
   runApp(const MyApp());
 }
 

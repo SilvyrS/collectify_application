@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:collectify_application/aboutUsScreen.dart';
 import 'package:collectify_application/home.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +25,7 @@ Column HeaderDrawer() {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Image.asset(
-        '../assets/logo1.png',
+        'assets/logo1.png',
         height: 80,
         width: 80,
       ),
@@ -50,19 +48,19 @@ Column ListDrawer(BuildContext context) {
       ListTile(
         leading: GestureDetector(
           child: Image.asset(
-            '../assets/home.png',
+            'assets/home.png',
             height: 30,
             width: 30,
           ),
           onTap: () {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+                context, MaterialPageRoute(builder: (_) => HomeScreen()));
           },
         ),
         title: Text('Home'),
         onTap: () {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+              context, MaterialPageRoute(builder: (_) => HomeScreen()));
         },
       ),
       SizedBox(
@@ -70,7 +68,7 @@ Column ListDrawer(BuildContext context) {
       ),
       ListTile(
         leading: Image.asset(
-          '../assets/animal.png',
+          'assets/animal.png',
           height: 30,
           width: 30,
         ),
@@ -81,7 +79,7 @@ Column ListDrawer(BuildContext context) {
       ),
       ListTile(
         leading: Image.asset(
-          '../assets/plant.png',
+          'assets/plant.png',
           height: 30,
           width: 30,
         ),
@@ -93,7 +91,7 @@ Column ListDrawer(BuildContext context) {
       ListTile(
         leading: GestureDetector(
           child: Image.asset(
-            '../assets/aboutus.png',
+            'assets/aboutus.png',
             height: 30,
             width: 30,
           ),
