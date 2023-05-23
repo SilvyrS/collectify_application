@@ -23,80 +23,81 @@ class DetailsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          FutureBuilder<String>(
-            future: _getImageUrl(item.imagePath),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Image.network(snapshot.data!);
-              } else if (snapshot.hasError) {
-                return Text('Error loading image');
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Container(
-              height: 550,
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Color(0xFF130f41),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Color(0xFF6ab04d),
+          Stack(
+            children: [
+              Positioned(
+                top: 0,
+                child: FutureBuilder<String>(
+                  future: _getImageUrl(item.onlineimgPath),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Image.network(snapshot.data!);
+                    } else if (snapshot.hasError) {
+                      return Text('Error loading image');
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  },
                 ),
-                child: Column(
-                  children: [
-                    Text(
-                      item.kingdom,
-                      style: GoogleFonts.roboto(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Container(
+                  height: 550,
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF130f41),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF6ab04d),
                     ),
-                    Text(
-                      item.name,
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF130f41)),
-                    ),
-                    SizedBox(height: 100),
-                    Container(
-                        padding: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFbbdc59),
+                    child: Column(
+                      children: [
+                        Text(
+                          item.kingdom,
+                          style: GoogleFonts.roboto(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
                         ),
-                        child: Text(
-                          item.description,
+                        Text(
+                          item.name,
                           style: TextStyle(
-                            fontSize: 16,
-                          ),
-                          textAlign: TextAlign.justify,
-                        )),
-                  ],
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF130f41)),
+                        ),
+                        SizedBox(height: 100),
+                        Container(
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xFFbbdc59),
+                            ),
+                            child: Text(
+                              item.description,
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                              textAlign: TextAlign.justify,
+                            )),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: Icon(Icons.arrow_back),
       ),
     );
   }
 
-  Future<String> _getImageUrl(String imagePath) async {
+  Future<String> _getImageUrl(String onlineimgPath) async {
     try {
       final ref =
-          firebase_storage.FirebaseStorage.instance.ref().child(imagePath);
+          firebase_storage.FirebaseStorage.instance.ref().child(onlineimgPath);
       return await ref.getDownloadURL();
     } catch (e) {
       print('Error getting image URL: $e');
