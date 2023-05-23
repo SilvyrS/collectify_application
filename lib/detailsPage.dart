@@ -64,8 +64,9 @@ class DetailsPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF130f41)),
                     ),
-                    SizedBox(height: 100),
+                    SizedBox(height: 50),
                     Container(
+                        height: 350,
                         padding: EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           color: Color(0xFFbbdc59),
@@ -75,7 +76,6 @@ class DetailsPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                           ),
-                          textAlign: TextAlign.justify,
                         )),
                   ],
                 ),
