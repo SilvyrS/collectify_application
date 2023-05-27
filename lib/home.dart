@@ -96,6 +96,20 @@ class _HomeScreenState extends State<HomeScreen> {
             child: TextField(
               onChanged: (value) => filterItems(value),
               decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                    width: 3,
+                    color: Color(0xFFBBD85D),
+                  )),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                    width: 3,
+                    color: Color(0xFFBBD85D),
+                  )),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
                   hintText: 'Search',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
@@ -108,55 +122,86 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget gridMage(BuildContext context) {
     return Expanded(
-      child: Container(
-        padding: EdgeInsets.all(8.0),
-        child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                mainAxisExtent: 200,
-                childAspectRatio: 2 / 1,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20),
-            itemCount: foundItems.length,
-            itemBuilder: (BuildContext ctx, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          DetailsPage(item: foundItems[index]),
-                    ),
-                  );
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Color(0xFF6ab04d),
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                          colorFilter: new ColorFilter.mode(
-                              Colors.black.withOpacity(0.7), BlendMode.dstATop),
-                          image: AssetImage(foundItems[index].imagePath))),
-                  child: Container(
-                      alignment: Alignment.center,
-                      height: 85,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(3),
-                          color: Color.fromARGB(131, 0, 0, 0)),
-                      child: Text(
-                        foundItems[index].name,
-                        style: GoogleFonts.alegreyaSans(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
-                        textAlign: TextAlign.center,
-                      )),
+      child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              mainAxisExtent: 170,
+              childAspectRatio: 2 / 1,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 5),
+          itemCount: foundItems.length,
+          itemBuilder: (BuildContext ctx, index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailsPage(item: foundItems[index]),
+                  ),
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.all(10),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey, blurRadius: 5, offset: Offset(2, 5))
+                  ],
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
-              );
-            }),
-      ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                              margin: EdgeInsets.all(5),
+                              width: 255,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        foundItems[index].imagePath)),
+                              )),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 70,
+                            alignment: Alignment.centerRight,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF5B5CB7),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Icon(
+                                  Icons.arrow_right_alt,
+                                  color: Colors.white,
+                                ),
+                                Text("Explore",
+                                    style: TextStyle(color: Colors.white),
+                                    textAlign: TextAlign.center)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
     );
   }
 }
