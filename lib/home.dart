@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'detailsPage.dart';
 import 'package:collectify_application/models/plantmodel.dart';
 import 'app_drawer.dart';
@@ -14,49 +16,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Plant_Animal> items = [
-    Plant_Animal(
-      kingdom: 'Plant Kingdom',
-      name: 'Thallophyta',
-      description:
-          'Primitive and simple body structures. The plant body is thallus, they may be filamentous, colonial, branched or unbranched. include green algae, red algae and brown algae.',
-      imagePath: 'assets/Thallophyta2.jpg',
-      onlineimgPath: 'images/Thallophyta2.jpg',
-    ),
+  final CollectionReference _plantAnimalCollection =
+      FirebaseFirestore.instance.collection('plants');
 
-    Plant_Animal(
-      kingdom: 'Animal Kingdom',
-      name: 'Arthropod',
-      description:
-          'Phylum of invertebrate animals (as insects, arachnids, and crustaceans) having a segmented body, jointed limbs, and a shell of chitin that is shed periodically.',
-      imagePath: 'assets/arthropod.jpg',
-      onlineimgPath: 'images/arthropod.jpg',
-    ),
-    Plant_Animal(
-      kingdom: 'Plant Kingdom',
-      name: 'Byrophytes',
-      description:
-          'Bryophytes are terrestrial plants but are known as “amphibians of the plant kingdom” as they require water for sexual reproduction. Bryophyta includes mosses, hornworts and liverworts.',
-      imagePath: 'assets/Bryophyta2.jpg',
-      onlineimgPath: 'images/Bryophyta2.jpg',
-    ),
-    Plant_Animal(
-      kingdom: 'Animal Kingdom',
-      name: 'Fish',
-      description:
-          'Fish are aquatic vertebrate animals that have gills but lack limbs with digits, like fingers or toes. Recall that vertebrates are animals with internal backbones. Most fish are streamlined in their general body form.',
-      imagePath: 'assets/fish2.jpg',
-      onlineimgPath: 'images/fish2.jpg',
-    ),
-    // Add more items as needed
-  ];
-
+  List<Plant_Animal> items = [];
   List<Plant_Animal> foundItems = [];
 
   void initState() {
     // at the beginning, all users are shown
     super.initState();
-    foundItems.addAll(items);
+    fetchItems();
+  }
+
+  Future<void> fetchItems() async {
+    final snapshot = await _plantAnimalCollection.get();
+    final List<Plant_Animal> fetchedItems = snapshot.docs.map((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      return Plant_Animal.fromMap(doc.id, data);
+    }).toList();
+    setState(() {
+      items = fetchedItems;
+      foundItems = items;
+    });
   }
 
   void filterItems(String query) {
