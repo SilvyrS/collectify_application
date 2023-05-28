@@ -1,3 +1,4 @@
+import 'package:collectify_application/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'aboutUsScreen.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: splashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

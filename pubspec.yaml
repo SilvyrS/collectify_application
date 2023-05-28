@@ -38,6 +38,7 @@ dependencies:
   firebase_analytics: ^1.0.7
   firebase_storage: ^10.0.4 
   google_fonts: ^2.0.0
+  loading_animation_widget:
 
 
 
