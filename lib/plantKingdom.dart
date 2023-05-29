@@ -142,14 +142,25 @@ class _plantKingdomScreenState extends State<plantKingdomScreen> {
                       children: [
                         Expanded(
                           child: Container(
-                              margin: EdgeInsets.all(5),
-                              width: 150,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        foundItems[index].imagePath)),
-                              )),
+                            margin: EdgeInsets.all(5),
+                            width: 140,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage(foundItems[index].imagePath)),
+                            ),
+                            child: Container(
+                              margin: EdgeInsets.only(top: 125),
+                              child: Text(
+                                foundItems[index].name,
+                                style: GoogleFonts.roboto(
+                                    color: Color(0xFF130f40),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

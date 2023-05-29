@@ -21,87 +21,165 @@ class DetailsPage extends StatelessWidget {
           style: GoogleFonts.lobsterTwo(fontSize: 25),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Stack(
-                children: [
-                  FutureBuilder<String>(
-                    future: _getImageUrl(item.onlineimgPath),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Image.network(snapshot.data!);
-                      } else if (snapshot.hasError) {
-                        return Text('Error loading image');
-                      } else {
-                        return CircularProgressIndicator();
-                      }
-                    },
-                  ),
-                  Transform.translate(
-                    offset: Offset(0, 125),
-                    child: Center(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            _buildDetails(context),
-                          ]),
+      body: Container(
+        child: SingleChildScrollView(
+          child: Expanded(
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    FutureBuilder<String>(
+                      future: _getImageUrl(item.onlineimgPath),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Image.network(snapshot.data!);
+                        } else if (snapshot.hasError) {
+                          return Text('Error loading image');
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                      },
                     ),
+                    Transform.translate(
+                      offset: Offset(0, 175),
+                      child: Center(
+                        child: SingleChildScrollView(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                _buildDetails(context),
+                              ]),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDetails(BuildContext context) {
+    return Positioned(
+      top: 30,
+      child: Container(
+        padding: const EdgeInsets.all(0.0),
+        child: Container(
+          width: 300,
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              color: Color(0xFF6ab04d),
+              borderRadius: BorderRadius.circular(20)),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                color: Color(0xFF30326b),
+                borderRadius: BorderRadius.circular(20)),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildTopDetails(context),
+                  SizedBox(
+                    height: 20,
                   ),
+                  _buildBotDetails(context),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Container(
-                  height: 550,
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF130f41),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF6ab04d),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          item.kingdom,
-                          style: GoogleFonts.roboto(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          item.name,
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF130f41)),
-                        ),
-                        SizedBox(height: 100),
-                        Container(
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFbbdc59),
-                            ),
-                            child: Text(
-                              item.description,
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                              textAlign: TextAlign.justify,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildTopDetails(BuildContext context) {
+    return SingleChildScrollView(
+      child: Container(
+        child: Column(
+          children: [
+            Text(
+              item.name,
+              style: GoogleFonts.roboto(
+                  decoration: TextDecoration.underline,
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              item.kingdom,
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 255, 255, 255)),
+            ),
+            Text(
+              item.genus,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 255, 255, 255)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBotDetails(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Scientific Name: ",
+              style: TextStyle(
+                  fontSize: 14,
+                  fontStyle: FontStyle.italic,
+                  color: Color.fromARGB(255, 255, 255, 255)),
+            ),
+            Text(
+              item.scientificname,
+              style: TextStyle(
+                  fontSize: 14,
+                  fontStyle: FontStyle.italic,
+                  color: Color.fromARGB(255, 255, 255, 255)),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        Text(
+          "Description",
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 255, 255, 255)),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 400,
+          child: Text(
+            item.description,
+            style: TextStyle(
+                fontSize: 16, color: Color.fromARGB(255, 255, 255, 255)),
+            textAlign: TextAlign.justify,
+          ),
+        ),
+        SizedBox(
+          height: 15,
+        ),
+      ],
     );
   }
 

@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'detailsPage.dart';
 import 'package:collectify_application/models/plantmodel.dart';
 import 'app_drawer.dart';
-import 'models/plantmodel.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -142,14 +141,25 @@ class _animalKingdomScreenState extends State<animalKingdomScreen> {
                       children: [
                         Expanded(
                           child: Container(
-                              margin: EdgeInsets.all(5),
-                              width: 150,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        foundItems[index].imagePath)),
-                              )),
+                            margin: EdgeInsets.all(5),
+                            width: 140,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage(foundItems[index].imagePath)),
+                            ),
+                            child: Container(
+                              margin: EdgeInsets.only(top: 120),
+                              child: Text(
+                                foundItems[index].name,
+                                style: GoogleFonts.roboto(
+                                    color: Color(0xFF130f40),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
