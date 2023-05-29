@@ -1,6 +1,7 @@
 import 'package:collectify_application/aboutUsScreen.dart';
 import 'package:collectify_application/animalKingdom.dart';
 import 'package:collectify_application/home.dart';
+import 'package:collectify_application/plantKingdom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -89,6 +90,10 @@ Column ListDrawer(BuildContext context) {
           width: 30,
         ),
         title: Text('Plant Kingdom'),
+        onTap: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => plantKingdomScreen()));
+        },
       ),
       SizedBox(
         height: 20,
