@@ -1,3 +1,4 @@
+import 'package:collectify_application/animalKingdom.dart';
 import 'package:collectify_application/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: splashScreen(),
+      home: animalKingdomScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

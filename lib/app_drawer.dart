@@ -1,4 +1,5 @@
 import 'package:collectify_application/aboutUsScreen.dart';
+import 'package:collectify_application/animalKingdom.dart';
 import 'package:collectify_application/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -73,6 +74,10 @@ Column ListDrawer(BuildContext context) {
           width: 30,
         ),
         title: Text('Animal Kingdom'),
+        onTap: () {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => animalKingdomScreen()));
+        },
       ),
       SizedBox(
         height: 20,
