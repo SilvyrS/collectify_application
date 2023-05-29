@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final CollectionReference _plantAnimalCollection =
+  final CollectionReference _plantCollection =
       FirebaseFirestore.instance.collection('plants');
   final CollectionReference _animalCollection =
       FirebaseFirestore.instance.collection('animals');
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> fetchItems() async {
-    final snapshot = await _plantAnimalCollection.get();
+    final snapshot = await _plantCollection.get();
     final List<Plant_Animal> fetchedItems = snapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
       return Plant_Animal.fromMap(doc.id, data);

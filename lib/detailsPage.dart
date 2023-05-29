@@ -69,6 +69,27 @@ class DetailsPage extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF130f41)),
                         ),
+                        Text(
+                          item.genus,
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF130f41)),
+                        ),
+                        Text(
+                          item.scientificname,
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF130f41)),
+                        ),
+                        Text(
+                          item.division,
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF130f41)),
+                        ),
                         SizedBox(height: 100),
                         Container(
                             padding: EdgeInsets.all(10.0),

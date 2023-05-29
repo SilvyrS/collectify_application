@@ -5,6 +5,9 @@ class Plant_Animal {
   final dynamic imagePath;
   final String onlineimgPath;
   final String kingdom;
+  final String genus;
+  final String scientificname;
+  final String division;
 
   Plant_Animal({
     required this.id,
@@ -13,6 +16,9 @@ class Plant_Animal {
     required this.imagePath,
     required this.kingdom,
     required this.onlineimgPath,
+    required this.genus,
+    required this.scientificname,
+    required this.division,
   });
 
   static Plant_Animal fromMap(String id, Map<String, dynamic> data) {
@@ -23,6 +29,9 @@ class Plant_Animal {
       imagePath: data['imagePath'],
       kingdom: data['Kingdom'],
       onlineimgPath: data['onlineimgPath'],
+      genus: data['Genus'],
+      scientificname: data['ScientificName'],
+      division: data['Division'],
     );
   }
 }
