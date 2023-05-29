@@ -58,8 +58,7 @@ class _plantKingdomScreenState extends State<plantKingdomScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Color(0xFF130f40),
-        title:
-            Text('Plant Kingdom', style: GoogleFonts.lobsterTwo(fontSize: 30)),
+        title: Text('Collectify', style: GoogleFonts.lobsterTwo(fontSize: 30)),
       ),
       body: Column(children: <Widget>[SearchBar(), gridMage(context)]),
       drawer: MyAppBar(context),
